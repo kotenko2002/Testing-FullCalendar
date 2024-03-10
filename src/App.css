@@ -1,3 +1,7 @@
 .app {
   padding: 100px;
 }
+
+.fc-event {
+  cursor: pointer;
+}
