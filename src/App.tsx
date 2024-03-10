@@ -15,6 +15,30 @@ const App: React.FC = () => {
     setEvents(generateEvents());
   }, []);
 
+  const handleOnTodayButtonClick = () => {
+    console.log('today clicked!');
+
+    if (calendarRef.current) {
+      calendarRef.current.getApi().today();
+    }
+  }
+
+  const handleOnPrevButtonClick = () => {
+    console.log('prev clicked!');
+
+    if (calendarRef.current) {
+      calendarRef.current.getApi().prev();
+    }
+  }
+
+  const handleOnNextButtonClick = () => {
+    console.log('next clicked!');
+
+    if (calendarRef.current) {
+      calendarRef.current.getApi().next();
+    }
+  }
+  
   return (
     <div className='app'>
       <FullCalendar
@@ -29,15 +53,9 @@ const App: React.FC = () => {
         dayHeaderFormat={{ weekday: 'long', day: '2-digit' }} // Mon 17.03 -> Mon 17
         contentHeight="auto" // прибирає скрол
         customButtons={{
-          prev: {
-            click: () => {
-              console.log(1);
-              if (calendarRef.current) {
-                let calendarApi = calendarRef.current.getApi();
-                calendarApi.prev();
-              }
-            }
-          }
+          prev: { click: handleOnPrevButtonClick },
+          next: { click: handleOnNextButtonClick },
+          today: { text: "Сьогодні", click: handleOnTodayButtonClick }
         }}
         eventClick={info => alert(`Ви натиснули на подію: ${info.event.title}\n Початок: ${info.event.start}\n Кінець: ${info.event.end}`)}
       />
